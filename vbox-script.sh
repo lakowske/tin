@@ -1,8 +1,8 @@
 #!/bin/bash
 
 print-usage() {
-    echo "Usage: $0 create <VM Name> <vdi path>"
-    echo "copy <VM Name> <hddimage path> <source hdd uuid>"
+    echo "Usage: $0 create <VM Name> <vdi path> |"
+    echo "copy <VM Name> <hddimage path> <source hdd uuid> |"
     echo "delete <VM Name>"
     exit 1
 }
