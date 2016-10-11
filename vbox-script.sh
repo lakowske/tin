@@ -1,7 +1,9 @@
 #!/bin/bash
 
 print-usage() {
-    echo "Usage: $0 <create|delete> <VM Name> [vdi path]"
+    echo "Usage: $0 create <VM Name> <vdi path>"
+    echo "copy <VM Name> <hddimage path> <source hdd uuid>"
+    echo "delete <VM Name>"
     exit 1
 }
 
@@ -17,6 +19,8 @@ create-machine() {
     #Image already created, user points to it with VM_VDI
     VBoxManage createhd --filename $VM_VDI --size 80000
 
+    vboxmanage clonemedium f9fd8ede-a04b-41df-88e6-1df2264e34d9 $VM_VDI
+    
     VBoxManage createvm --name $VM_NAME --ostype "Linux_64" --register
     VBoxManage storagectl $VM_NAME --name "SATA Controller" --add sata --controller IntelAHCI
     VBoxManage storageattach $VM_NAME --storagectl "SATA Controller" --port 0   --device 0 --type hdd --medium $VM_VDI
