@@ -1,6 +1,15 @@
 #export VM_NAME="Ubuntu_16.04"
 #export VM_VDI=/path/to/a/machine.vdi
 
+print-usage() {
+    echo "Usage: $0 <create|delete> <VM Name> [vdi path]"
+    exit 1
+}
+
+if [ "$#" -ne 2 ]; then
+    print-usage
+fi
+
 #Image already created, user points to it with VM_VDI
 VBoxManage createhd --filename $VM_VDI --size 80000
 
