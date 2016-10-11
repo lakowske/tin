@@ -5,7 +5,7 @@ print-usage() {
     exit 1
 }
 
-if [ "$#" -ge 2 ]; then
+if [ "$#" -ge "2" ]; then
     print-usage
 fi
 
