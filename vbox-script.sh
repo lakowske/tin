@@ -1,8 +1,11 @@
-export VM="Ubuntu_16.04"
-VBoxManage createhd --filename $VM_VDI --size 80000
-VBoxManage createvm --name $VM --ostype "Linux_64" --register
-VBoxManage storagectl $VM --name "SATA Controller" --add sata --controller IntelAHCI
-VBoxManage storageattach $VM --storagectl "SATA Controller" --port 0   --device 0 --type hdd --medium $VM.vdi
+export VM_NAME="Ubuntu_16.04"
+
+#Image already created, user points to it with VM_VDI
+#VBoxManage createhd --filename $VM_VDI --size 80000
+
+VBoxManage createvm --name $VM_NAME --ostype "Linux_64" --register
+VBoxManage storagectl $VM_NAME --name "SATA Controller" --add sata --controller IntelAHCI
+VBoxManage storageattach $VM_NAME --storagectl "SATA Controller" --port 0   --device 0 --type hdd --medium $VM_VDI
 
 # No need to add installer iso for tin machine copies
 #VBoxManage storagectl $VM --name "IDE Controller" --add ide
