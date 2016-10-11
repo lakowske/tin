@@ -16,17 +16,19 @@ VM_NAME=$2
 VM_PATH=$3
 VM_HDD_UUID=$4
 
+echo "creating $VM_NAME using $VM_PATH"
+
 create-machine() {
 
     #Create 100GB hdd and the rest of the machine
-    VBoxManage createhd --filename $VM_VDI --size 100000
+    VBoxManage createhd --filename $VM_PATH --size 100000
     build-machine
 
 }
 
 copy-machine() {
 
-    vboxmanage clonemedium $VM_HDD_UUID $VM_VDI
+    vboxmanage clonemedium $VM_HDD_UUID $VM_PATH
     build-machine
 
 }
@@ -35,7 +37,7 @@ build-machine() {
 
     VBoxManage createvm --name $VM_NAME --ostype "Linux_64" --register
     VBoxManage storagectl $VM_NAME --name "SATA Controller" --add sata --controller IntelAHCI
-    VBoxManage storageattach $VM_NAME --storagectl "SATA Controller" --port 0   --device 0 --type hdd --medium $VM_VDI
+    VBoxManage storageattach $VM_NAME --storagectl "SATA Controller" --port 0   --device 0 --type hdd --medium $VM_PATH
 
     # No need to add installer iso for tin machine copies
     #VBoxManage storagectl $VM_NAME --name "IDE Controller" --add ide
