@@ -1,5 +1,4 @@
-#export VM_NAME="Ubuntu_16.04"
-#export VM_VDI=/path/to/a/machine.vdi
+#!/bin/bash
 
 print-usage() {
     echo "Usage: $0 <create|delete> <VM Name> [vdi path]"
