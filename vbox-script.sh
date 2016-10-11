@@ -14,20 +14,6 @@ CMD=$1
 VM_NAME=$2
 VM_PATH=$3
 
-parse-cmd() {
-    case $CMD in
-        create)
-            create-machine
-            ;;
-        delete)
-            delete-machine
-            ;;
-        *)
-            print-usage
-            ;;
-    esac
-}
-
 create-machine() {
     #Image already created, user points to it with VM_VDI
     VBoxManage createhd --filename $VM_VDI --size 80000
@@ -52,4 +38,18 @@ function delete-machine() {
     VBoxManage unregistervm $VM_NAME --delete
 }
 
-#VBoxHeadless -s $VM_NAME
+parse-cmd() {
+    case $CMD in
+        create)
+            create-machine
+            ;;
+        delete)
+            delete-machine
+            ;;
+        *)
+            print-usage
+            ;;
+    esac
+}
+
+parse-cmd
