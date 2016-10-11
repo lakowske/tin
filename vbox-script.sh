@@ -1,4 +1,5 @@
-export VM_NAME="Ubuntu_16.04"
+#export VM_NAME="Ubuntu_16.04"
+#export VM_VDI=/path/to/a/machine.vdi
 
 #Image already created, user points to it with VM_VDI
 #VBoxManage createhd --filename $VM_VDI --size 80000
