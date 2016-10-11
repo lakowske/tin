@@ -14,13 +14,25 @@ fi
 CMD=$1
 VM_NAME=$2
 VM_PATH=$3
+VM_HDD_UUID=$4
 
 create-machine() {
-    #Image already created, user points to it with VM_VDI
-    VBoxManage createhd --filename $VM_VDI --size 80000
 
-    vboxmanage clonemedium f9fd8ede-a04b-41df-88e6-1df2264e34d9 $VM_VDI
-    
+    #Create 100GB hdd and the rest of the machine
+    VBoxManage createhd --filename $VM_VDI --size 100000
+    build-machine
+
+}
+
+copy-machine() {
+
+    vboxmanage clonemedium $VM_HDD_UUID $VM_VDI
+    build-machine
+
+}
+
+build-machine() {
+
     VBoxManage createvm --name $VM_NAME --ostype "Linux_64" --register
     VBoxManage storagectl $VM_NAME --name "SATA Controller" --add sata --controller IntelAHCI
     VBoxManage storageattach $VM_NAME --storagectl "SATA Controller" --port 0   --device 0 --type hdd --medium $VM_VDI
@@ -45,6 +57,9 @@ parse-cmd() {
     case $CMD in
         create)
             create-machine
+            ;;
+        copy)
+            copy-machine
             ;;
         delete)
             delete-machine
