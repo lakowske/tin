@@ -2,7 +2,7 @@
 #export VM_VDI=/path/to/a/machine.vdi
 
 #Image already created, user points to it with VM_VDI
-#VBoxManage createhd --filename $VM_VDI --size 80000
+VBoxManage createhd --filename $VM_VDI --size 80000
 
 VBoxManage createvm --name $VM_NAME --ostype "Linux_64" --register
 VBoxManage storagectl $VM_NAME --name "SATA Controller" --add sata --controller IntelAHCI
