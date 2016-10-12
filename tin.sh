@@ -49,6 +49,7 @@ build-machine() {
     VBoxManage modifyvm $VM_NAME --nic2 hostonly --hostonlyadapter2 vboxnet1
     VBoxManage showvminfo $VM_NAME
     VBoxManage modifyvm $VM_NAME --vrde on
+    VBoxManage startvm $VM_NAME
 }
 
 function delete-machine() {
