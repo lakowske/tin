@@ -52,6 +52,7 @@ build-machine() {
 }
 
 function delete-machine() {
+    VBoxManage controlvm $VM_NAME poweroff
     VBoxManage unregistervm $VM_NAME --delete
 }
 
